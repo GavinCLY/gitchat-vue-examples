@@ -1,0 +1,50 @@
+<html>
+  <div id="app">
+    <div ref="wrap">
+      {{ a }}
+      <button @click="update">更新</button>
+      <button @click="close">销毁该实例</button>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  <script>
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        a: 1
+      },
+      methods: {
+        update () {
+          this.a += 1;
+        },
+        close () {
+          this.$destroy();
+        }
+      },
+      beforeCreate: function() {
+        console.log('beforeCreate', this);
+      },
+      created: function() {
+        console.log('created', this.a);
+      },
+      beforeMount: function() {
+        console.log('beforeMount', this.$refs.wrap);
+      },
+      mounted: function() {
+        console.log('mounted', this.$refs.wrap);
+      },
+      beforeUpdate: function() {
+        console.log('beforeUpdate', this.a)
+      },
+      updated: function() {
+        console.log('updated', this.a)
+      },
+      beforeDestroy: function() {
+        console.log('beforeDestroy', this.a);
+      },
+      destroyed: function() {
+        console.log('destroyed', this.a);
+      }
+    })
+  </script>
+</html>
