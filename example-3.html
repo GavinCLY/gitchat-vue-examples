@@ -1,15 +1,55 @@
 <html>
   <div id="app">
-    <div v-if="isShown">此时data中isShown的值为true</div>
-    <div v-else>此时data中isShown的值为false</div>
+    <!-- 条件渲染 -->
+    <div v-if="isExisted">此时data中isExisted的值为true</div>
+    <div v-else>此时data中isExisted的值为false</div>
+
+    <div v-show="isShown">显示该元素</div>
+
+    <!-- 列表渲染 -->
+    <ul>
+      <li v-for="(item, itemIndex) in items">{{ itemIndex }}-{{ item.name }}</li>
+    </ul>
+
+    <ul>
+      <li v-for="val in 10">{{ val }}</li>
+    </ul>
+
+    <!-- 无父级元素 -->
+    <template v-if="noRoot">
+      <div>兄弟节点1</div>
+      <div>兄弟节点2</div>
+    </template>
+
+    <!-- 不被监听例子 -->
+    <div>{{ item.name }} {{ item.version }}</div>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/vue"></script>
   <script>
     var vm = new Vue({
       el: '#app',
       data: {
-        isShown: true
+        isExisted: true,
+        isShown: true,
+        items: [
+          { id: 1, name: 'v-if' },
+          { id: 2, name: 'v-else' },
+          { id: 3, name: 'v-show' },
+          { id: 4, name: 'v-for' }
+        ],
+        noRoot: true,
+        item: {
+          name: 'Vue.js'
+        }
       }
     });
+
+    // 不被监听的写法
+    // vm.items[0] = { id: 10, name: 'changed' };
+    // vm.item.version = '2.0';
+
+    // 监听
+    // vm.$set(vm.item, 'version', '2.0')
+    // Vue.set(vm.item, 'version', '2.0')
   </script>
 </html>
