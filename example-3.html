@@ -1,0 +1,15 @@
+<html>
+  <div id="app">
+    <div v-if="isShown">此时data中isShown的值为true</div>
+    <div v-else>此时data中isShown的值为false</div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  <script>
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        isShown: true
+      }
+    });
+  </script>
+</html>
