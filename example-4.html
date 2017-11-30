@@ -1,0 +1,41 @@
+<html>
+  <head></head>
+  <body>
+    <div id="app">
+      <!-- 事件监听 -->
+      <button v-on:click="press">按到了</button>
+      <button @click="press">按到了</button>
+
+      <button @click="count++">{{ count }}</button>
+      <button @click="pressMsg('按到了')">按到了</button>
+
+      <!-- 获取event对象 -->
+      <button @click="event">获取event</button>
+      <button @click="event($event)">获取event</button>
+      <button @click="event()">获取不到event</button>
+
+      <!-- 事件修饰符 -->
+      <input @keyup.ctrl.enter="alert('ctrl + enter')" />
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+      var vm = new Vue({
+        el: '#app',
+        data: {
+          count: 0
+        },
+        methods: {
+          press: function () {
+            alert('pressed');
+          },
+          pressMsg: function(msg) {
+            alert(msg);
+          },
+          event: function (e) {
+            console.log(e)
+          }
+        }
+      })
+    </script>
+  </body>
+</html>

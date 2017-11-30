@@ -1,0 +1,52 @@
+<html>
+  <head>
+    <style type="text/css">
+      input, select {
+        display: block; margin-bottom: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <!-- 表单处理 -->
+      <input type="text" v-model="username" />
+      <input type="password" v-model="password" />
+      <textarea v-model="content"></textarea>
+      <!-- 单选、复选框 -->
+      <input type="radio" v-model="picked" value="1"> 
+      <input type="radio" v-model="picked" value="2">
+
+      <input type="checkbox" v-model="checked" value="1"> 
+      <input type="checkbox" v-model="checked" value="2"> 
+
+      <!-- 单选、复选列表 -->
+      <select v-model="selected">
+        <option>a</option>
+        <option>b</option>
+        <option>c</option>
+      </select>
+
+      <select v-model="multiSelected" multiple>
+        <option value="a">a1</option>
+        <option value="b">b1</option>
+        <option value="c">c1</option>
+      </select>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+      var vm = new Vue({
+        el: '#app',
+        data: {
+          username: '',
+          password: '',
+          content: '',
+          picked: '',
+          checked: [],
+          selected: '',
+          multiSelected: []
+        }
+      })
+    </script>
+  </body> 
+</html>
