@@ -1,0 +1,82 @@
+<html>
+  <head>
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui" name="viewport">
+    <style type="text/css">
+      .paddingTop {
+        height: 500px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <!-- 内置指令 -->
+      <div>{{ msg }}</div>
+      <div v-once>{{ msg }}</div>
+      <!-- 自定义指令 -->
+      <div v-if="myDir" v-my-directive.stop.prevent="msg">
+        {{ msg }}
+      </div>
+      <div class="paddingTop"></div>
+      <img v-lazy="img_url" />
+      <div class="paddingTop"></div>
+      <img v-lazy="img_url2" />
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+      var vm = new Vue({
+        el: '#app',
+        data: {
+          msg: 'Hello World.',
+          myDir: true,
+          img_url: 'https://img3.aixuehuisi.com/logo.png',
+          img_url2: 'https://jingdiaoxike.cn/static/site/img/nav__logo.png'
+        },
+        directives: {
+          'my-directive': {
+            bind: function(el, binding, vnode, oldVnode) {
+              console.log('bind', binding);
+            },
+            inserted: function(el, binding, vnode, oldVnode) {
+              console.log('inserted');
+            },
+            update: function(el, binding, vnode, oldVnode) {
+              console.log('update');
+            },
+            componentUpdated: function(el, binding, vnode, oldVnode) {
+              console.log('componentUpdated');
+            },
+            unbind: function(el, binding, vnode, oldVnode) {
+              console.log('unbind');
+            },
+          },
+          'lazy': {
+            inserted: function (el, binding) {
+              var body = document.body;
+              var offsetTop = el.offsetTop;
+              var parent = el.offsetParent;
+              // 获取绑定元素对于body顶部的距离
+              while (parent && parent.tagName != 'body') {
+                offsetTop += parent.offsetTop;
+                parent = parent.offsetParent;
+              }
+              // 若出现在可视区域内，则直接赋值src
+              if (body.scrollTop + body.clientHeight > offsetTop && body.scrollTop < offsetTop) {
+                el.src = binding.value;
+              } else {
+                // 若暂未出现，则监听window的scroll事件 
+                var scrollFn = function () {
+                  // 出现在区域内才赋值src，并取消事件监听
+                  if (body.scrollTop + body.clientHeight > offsetTop && body.scrollTop < offsetTop) {
+                    el.src = binding.value;
+                    window.removeEventListener('scroll', scrollFn)
+                  }
+                }
+                window.addEventListener('scroll', scrollFn)
+              }
+            }
+          }
+        }
+      })
+    </script>
+  </body> 
+</html>

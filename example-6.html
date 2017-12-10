@@ -1,0 +1,50 @@
+<html>
+  <head>
+  </head>
+  <body>
+    <div id="app">
+      <!-- v-bind -->
+      <img v-bind:src="url" /> 
+      <input type="radio" v-model="gender" :value="male" /> 
+      <img v-bind:src="url + '?imageMogr2/thumbnail/!50p'" />
+      <div :inner-text.prop="text"></div>
+
+      <!-- 对象语法 -->
+      <div :class="{ active: isActive }"></div>
+      <div :class="classObj"></div>
+      <div :style="{ marginTop: '5px', 'margin-bottom': '10px' }"></div>
+      <div :style="styleObj"></div>
+
+      <!-- 数组语法 -->
+      <div :class="classList"></div> 
+      <div :class="[classOne, 'classTwo']"></div>
+      <div :class="[classObj, 'classTwo']"></div>
+      <div :class="[isActive ? classOne : 'classTwo']"></div> 
+
+      <div :style="[styleObj, { paddingTop: '5px' }]"></div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+      var vm = new Vue({
+        el: '#app',
+        data: {
+          url: '',
+          male: 1,
+          gender: '',
+          text: 'This is a message.',
+          isActive: false,
+          // 对象语法
+          classObj: {
+            active: true
+          },
+          styleObj: {
+            marginTop: '5px',
+            'margin-bottom': '10px'
+          },
+          classList: ['classOne', 'classTwo'],
+          classOne: 'classOne'
+        }
+      })
+    </script>
+  </body> 
+</html>

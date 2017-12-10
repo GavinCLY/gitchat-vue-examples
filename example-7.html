@@ -1,0 +1,85 @@
+<html>
+  <head>
+    <style type="text/css">
+      div {
+        margin: 20px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div>
+        <input type="text" v-model="username">
+        <input type="password" v-model="password">
+        <input type="password" v-model="repeatPwd">
+        <input type="phone" v-model="phone">
+        <!-- 计算属性 -->
+        <button :class="[canSubmit ? 'active' : 'unactive']" @click="submit">提交</button>
+      </div>
+      
+      <!-- settter -->
+      <div>
+        <input type="number" v-model="yuan" placehoder="请输入金额，单位为元"/>
+        元: {{ yuan }}
+        分: {{ cents }}
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+      var vm = new Vue({
+        el: '#app',
+        data: {
+          username: '',
+          password: '',
+          repeatPwd: '',
+          phone: '',
+          cents: 100,
+          item: {
+            name: 'Vue.js',
+            version: '1.0'
+          }
+        },
+        computed: {
+          canSubmit: function () {
+            // this被绑定为当前Vue实例
+            return this.username && this.password && this.repeatPwd && this.phone  
+          },
+          yuan: {
+            set: function (val) {
+              this.cents = parseInt(val * 100);
+            },
+            get: function () {
+              return this.cents / 100;
+            }
+          }
+        },
+        watch: {
+          username: function(val, oldVal) {
+            console.log(val, oldVal)
+          },
+          // username: {
+          //   handler: function (val, oldVal) {
+          //     console.log('immediate', val)
+          //   },
+          //   immediate: true
+          // }
+          item: {
+            handler: function (val, oldVal) {
+              console.log(val)
+            },
+            deep: true
+          }
+        },
+        methods: {
+          submit: function () {
+            if (!this.canSubmit) {
+              alert('信息不全')
+              return;
+            }
+            alert('提交')
+          }
+        }
+      })
+    </script>
+  </body> 
+</html>
