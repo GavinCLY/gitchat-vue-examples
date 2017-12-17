@@ -3,9 +3,11 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import VueMoment from 'vue-moment'
 // import Block from './components/Block'
 
 // Vue.component('block', Block);
+Vue.use(VueMoment)
 
 Vue.config.productionTip = false
 

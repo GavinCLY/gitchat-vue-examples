@@ -3,6 +3,8 @@ import Router from 'vue-router'
 import CarouselDemo from '@/views/CarouselDemo'
 import ModalDemo from '@/views/ModalDemo'
 import ListDemo from '@/views/ListDemo'
+import MixinDemo from '@/views/MixinDemo'
+import Moment from '@/views/Moment'
 
 Vue.use(Router)
 
@@ -22,6 +24,16 @@ export default new Router({
       path: '/list',
       name: 'list',
       component: ListDemo
+    },
+    {
+      path: '/mixin',
+      name: 'mixin',
+      component: MixinDemo
+    },
+    {
+      path: '/moment',
+      name: 'moment',
+      component: Moment
     }
   ]
 })

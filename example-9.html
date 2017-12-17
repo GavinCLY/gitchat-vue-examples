@@ -1,0 +1,31 @@
+<html>
+  <head>
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui" name="viewport">
+  </head>
+  <body>
+    <div id="app">
+      <!-- 过滤器 -->
+      {{ data | filterA(argu1, 'argu2') }}
+      <div v-bind:inner-text.prop="data | filterA(argu1, 'argu2') | filterB"></div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+      var vm = new Vue({
+        el: '#app',
+        data: {
+          data: 'vue.js',
+          argu1: true
+        },
+        filters: {
+          filterA (data, argu1, argu2) {
+            console.log(data, argu1, argu2);
+            return argu1 ? data : argu2
+          },
+          filterB (val) {
+            return 'processed by B: ' + val
+          }
+        }
+      })
+    </script>
+  </body> 
+</html>

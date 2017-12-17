@@ -1,0 +1,110 @@
+<html>
+  <head>
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui" name="viewport">
+    <style type="text/css">
+      .fade-enter-active, .fade-leave-active {
+        transition: opacity 2.5s
+      }
+      .fade-enter, .fade-leave-to {
+        opacity: 0
+      }
+      .fade-move {
+        transition: transform 1s;
+      }
+      .fx {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        font-size: 30px;
+        position: relative;
+      }
+      .fx span {
+        display: block;
+        position: relative;
+        flex: none;
+        white-space: pre;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <transition name="fade">
+        <p v-if="display">Vue.js</p>
+      </transition>
+
+      <transition-group tag="ul" name="fade">
+        <li v-for="item in items" :key="item">{{ item }}</li>
+      </transition-group>
+
+      <!-- 文字特效 -->
+      <text-effect>
+        <span v-for="(t, index) in message.split('')" 
+          :data-index="index"
+          :key="Math.random()">{{ t }}</span>
+      </text-effect>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.3/velocity.min.js"></script>
+    <script>
+      Vue.component('text-effect', {
+        template: '<transition-group :css="false" class="fx" tag="div" mode="in-out" \
+            @before-enter="beforeEnter" \
+            @enter="enter" \
+            @before-leave="beforeLeave" \
+            @leave="leave"> \
+            <slot></slot> \
+          </transition-group>',
+        methods: {
+          beforeEnter: function (el) {
+            const index = parseInt(el.dataset.index);
+            Velocity(el, { 
+              opacity: 0, 
+              translateY: index % 2 == 0 ? '-80%' : '80%',
+              rotateZ: 90
+            });
+          },
+          enter: function (el, done) {
+            const index = parseInt(el.dataset.index);
+            Velocity(
+              el, 
+              { translateY: 0, opacity: 1, rotateZ: 0 }, 
+              { 
+                duration: 700, 
+                easing: 'easeOutElastic', 
+                delay: index * 80, 
+                complete: done
+              }
+            )
+          },
+          beforeLeave: function (el) {
+            el.style.position = 'absolute';
+            var prev = el.previousSibling, left = 0;
+            while (prev) {
+              left += prev.offsetWidth;
+              prev = prev.previousSibling;
+            }
+            el.style.left = left + 'px'
+          },
+          leave: function (el, done) {
+            const index = parseInt(el.dataset.index);
+            Velocity(
+              el, 
+              { translateY: index % 2 == 0 ? '80%' : '-80%', opacity: 0, rotateZ: index % 2 == 0 ? -25 : 25 }, 
+              { duration: 500, easing: 'easeOutExpo', delay: index * 80, complete: done }
+            );
+          }
+        }
+      });
+
+      var vm = new Vue({
+        el: '#app',
+        data: {
+          display: true,
+          items: [1, 2, 3, 4, 5],
+          message: 'Vue.js'
+        }
+      })
+      // vm.items = vm.items.sort(function (a, b) { return Math.random() > 0.5 })
+    </script>
+  </body> 
+</html>
