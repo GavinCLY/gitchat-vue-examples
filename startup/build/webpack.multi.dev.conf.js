@@ -3,7 +3,7 @@ const utils = require('./utils')
 const webpack = require('webpack')
 const config = require('../config')
 const merge = require('webpack-merge')
-const baseWebpackConfig = require('./webpack.base.conf')
+const baseWebpackConfig = require('./webpack.multi.base.conf')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const portfinder = require('portfinder')
@@ -44,10 +44,18 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     new webpack.NoEmitOnErrorsPlugin(),
     // https://github.com/ampedandwired/html-webpack-plugin
     new HtmlWebpackPlugin({
-      filename: 'index.html',
+      filename: 'user.html',
       template: 'index.html',
-      inject: true
-    })
+      inject: true,
+      chunks: ['user']
+    }),
+    //
+    new HtmlWebpackPlugin({
+      filename: 'shop.html',
+      template: 'index.html',
+      inject: true,
+      chunks: ['shop']
+    }),
   ]
 })
 

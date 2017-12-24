@@ -5,6 +5,7 @@ import ModalDemo from '@/views/ModalDemo'
 import ListDemo from '@/views/ListDemo'
 import MixinDemo from '@/views/MixinDemo'
 import Moment from '@/views/Moment'
+import Login from '@/views/Login'
 
 Vue.use(Router)
 
@@ -34,6 +35,11 @@ export default new Router({
       path: '/moment',
       name: 'moment',
       component: Moment
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: Login
     }
   ]
 })
