@@ -5,7 +5,11 @@ import ModalDemo from '@/views/ModalDemo'
 import ListDemo from '@/views/ListDemo'
 import MixinDemo from '@/views/MixinDemo'
 import Moment from '@/views/Moment'
-import Login from '@/views/Login'
+// import Login from '@/views/Login'
+import Todo from '@/views/Todo'
+import Calendar from '@/views/Calendar'
+
+const Login = () => import(/* webpackChunkName: "user" */'../views/Login')
 
 Vue.use(Router)
 
@@ -40,6 +44,16 @@ export default new Router({
       path: '/login',
       name: 'login',
       component: Login
+    },
+    {
+      path: '/todo',
+      name: 'todo',
+      component: Todo
+    },
+    {
+      path: '/calendar',
+      name: 'Calendar',
+      component: Calendar
     }
   ]
 })

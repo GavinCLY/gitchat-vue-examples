@@ -3,7 +3,8 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-// import VueMoment from 'vue-moment'
+import VueMoment from 'vue-moment'
+import store from './store'
 // import Block from './components/Block'
 
 // Vue.component('block', Block);
@@ -15,6 +16,7 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   router,
+  store,
   template: '<App/>',
   components: { App }
 })

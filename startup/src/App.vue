@@ -1,5 +1,7 @@
 <template>
   <div id="app">
+    <!-- <router-link to="carousel">aaa</router-link> -->
+    <!-- <router-link to="/carousel/dfsf">aaa</router-link> -->
     <router-view></router-view>
   </div>
 </template>
