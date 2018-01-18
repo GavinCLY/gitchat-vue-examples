@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex'
 
-import lodash from 'lodash'
+import _ from 'lodash'
 import * as types from './types'
 
 Vue.use(Vuex);
@@ -75,8 +75,8 @@ const store = new Vuex.Store({
       state.weeks = setMonth(state.year, state.month);
     },
 
-    [types.START_EVENT_DRAG] (state, { weekIndex, dayIndex }) {
-      state.drag.start = { weekIndex, dayIndex }
+    [types.START_EVENT_DRAG] (state, { weekIndex, dayIndex, eventIndex }) {
+      state.drag.start = { weekIndex, dayIndex, eventIndex }
     },
 
     [types.DRAG_OVER_DAY] (state, { weekIndex, dayIndex }) {

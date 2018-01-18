@@ -8,12 +8,14 @@ import Moment from '@/views/Moment'
 // import Login from '@/views/Login'
 import Todo from '@/views/Todo'
 import Calendar from '@/views/Calendar'
+import About from '@/views/About'
 
 const Login = () => import(/* webpackChunkName: "user" */'../views/Login')
 
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
   routes: [
     {
       path: '/carousel',
@@ -54,6 +56,12 @@ export default new Router({
       path: '/calendar',
       name: 'Calendar',
       component: Calendar
+    },
+    // 预渲染
+    {
+      path: '/about',
+      name: 'About',
+      component: About
     }
   ]
 })
