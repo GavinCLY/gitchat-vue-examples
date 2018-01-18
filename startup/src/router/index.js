@@ -8,9 +8,11 @@ import Moment from '@/views/Moment'
 // import Login from '@/views/Login'
 import Todo from '@/views/Todo'
 import Calendar from '@/views/Calendar'
-import About from '@/views/About'
 
 const Login = () => import(/* webpackChunkName: "user" */'../views/Login')
+
+// 预渲染
+const About = () => import(/* webpackChunkName: "static" */'../views/About')
 
 Vue.use(Router)
 
@@ -59,7 +61,7 @@ export default new Router({
     },
     // 预渲染
     {
-      path: '/about',
+      path: '/about/:index',
       name: 'About',
       component: About
     }

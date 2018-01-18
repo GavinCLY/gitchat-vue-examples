@@ -1,7 +1,9 @@
 <template>
   <div>
-    联系页面
+    关于我们
     {{ msg }}
+    {{ index }}
+    {{ data }}
   </div>
 </template>
 
@@ -9,8 +11,16 @@
   export default {
     data () {
       return {
-        msg: '1234'
+        msg: 'gitchat',
+        index: this.$route.params.index,
+        data: ''
       }
+    },
+
+    mounted () {
+      setTimeout(() => {
+        this.data = 'server data'
+      })
     }
   }
 </script>
