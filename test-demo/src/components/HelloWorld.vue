@@ -80,25 +80,31 @@
         </a>
       </li>
     </ul>
+    <carousel :items="['http://', 'http://', 'http://']"></carousel>
   </div>
 </template>
 
 <script>
-export default {
-  name: 'HelloWorld',
-  data () {
-    return {
-      msg: 'Welcome to Your Vue.js App',
-      branch: false
-    }
-  },
+  import Carousel from '../components/Carousel.vue'
 
-  methods: {
-    print () {
-      if (this.branch) console.log(this.msg);
+  export default {
+    name: 'HelloWorld',
+
+    components: { Carousel },
+
+    data () {
+      return {
+        msg: 'Welcome to Your Vue.js App',
+        branch: false
+      }
+    },
+
+    methods: {
+      print () {
+        if (this.branch) console.log(this.msg);
+      }
     }
   }
-}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

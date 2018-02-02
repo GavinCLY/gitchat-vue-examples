@@ -101,7 +101,6 @@ it('mousedown', done => {
 
     vm.receive()
     Vue.nextTick(() => {
-      console.log('received', vm.received);
       expect(vm.received).to.equal(5)
       vm.fetch.restore()
       done();
